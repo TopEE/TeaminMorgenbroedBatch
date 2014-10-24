@@ -27,6 +27,9 @@ public class morgenBroedItemReader extends AbstractItemReader {
         
         if (checkpoint != null)
             recordNumber = (Integer) checkpoint;
+        else
+            recordNumber = 0;
+            
         for (int i=1; i<recordNumber; i++) {   //Skip upto recordNumber
             reader.readLine();
         } 
@@ -35,10 +38,11 @@ public class morgenBroedItemReader extends AbstractItemReader {
     @Override
     public String readItem() {
         try {
-            recordNumber = Integer.valueOf(recordNumber.intValue() + 1);
+            recordNumber++;
             return reader.readLine();
         } catch (IOException ex) {
-            recordNumber = Integer.valueOf(recordNumber.intValue() - 1);
+            // Hmm...hvad sker der i ItemWriter?
+            recordNumber--;
             Logger.getLogger(morgenBroedItemReader.class.getName()).log(Level.SEVERE, null, ex);
         }
         
