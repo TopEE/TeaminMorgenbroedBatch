@@ -30,7 +30,7 @@ public class morgenBroedItemReader extends AbstractItemReader {
         else
             recordNumber = 0;
             
-        for (int i=1; i<recordNumber; i++) {   //Skip upto recordNumber
+        for (int i=1; i<recordNumber; i++) {   //Skip til recordNumber
             reader.readLine();
         } 
     }
