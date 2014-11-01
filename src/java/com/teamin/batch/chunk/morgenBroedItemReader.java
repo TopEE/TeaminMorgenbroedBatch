@@ -2,8 +2,8 @@ package com.teamin.batch.chunk;
 
 
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,12 +18,7 @@ public class morgenBroedItemReader extends AbstractItemReader {
 
     @Override
     public void open(Serializable checkpoint) throws Exception {
-        reader = new BufferedReader(
-                new InputStreamReader(
-                this
-                .getClass()
-                .getClassLoader()
-                .getResourceAsStream("/META-INF/morgenBroed.csv")));
+	reader = new BufferedReader(new FileReader("C:\\Temp\\testFiler\\morgenBroed.csv"));
         
         if (checkpoint != null)
             recordNumber = (Integer) checkpoint;
