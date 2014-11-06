@@ -49,9 +49,11 @@ public class JobSubmitterServlet extends HttpServlet {
             pw.println("</head>");
             pw.println("<body>");
 
-            pw.println("<p>Submitter job</p>");
-            submitJobFromXML("morgenBroedJob");
+            pw.println("<p>Submitter job med executionId</p>");
+            
+            long executionId = submitJobFromXML("morgenBroedJob");
 
+            pw.println(executionId);
             pw.println("</body>");
             pw.println("</html>");
         } catch (Exception ex) {
