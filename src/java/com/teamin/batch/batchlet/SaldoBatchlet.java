@@ -26,10 +26,14 @@ public class SaldoBatchlet extends AbstractBatchlet {
         
         try {
           	writer = new BufferedWriter(new FileWriter("C:\\Temp\\testFiler\\saldo.csv"));
-                writer.write("ABC\\,23");
-                writer.write("BBC\\,24");
-                writer.write("CBC\\,25");
-            
+                writer.append("HVE");
+                writer.append(',');
+                writer.append("31");
+                writer.append('\n');
+                
+                writer.flush();
+                writer.close();
+                
         } catch (Exception e) {
         }
         
