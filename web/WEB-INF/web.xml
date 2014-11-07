@@ -8,6 +8,14 @@
         <servlet-name>JobSubmitterServlet</servlet-name>
         <url-pattern>/JobSubmitterServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>UtilServlet</servlet-name>
+        <servlet-class>com.teamin.batch.servlet.UtilServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UtilServlet</servlet-name>
+        <url-pattern>/UtilServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
