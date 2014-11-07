@@ -7,11 +7,15 @@ and open the template in the editor.
 
 
 <job id="morgenBroedJob" xmlns="http://xmlns.jcp.org/xml/ns/javaee" version="1.0">
-    <step id="firstStep" >
+    
+    <step id="firstStep" next="secondStep">
         <chunk item-count="3">
             <reader ref="morgenBroedItemReader"/>
             <processor ref="morgenBroedItemProcessor"/>
             <writer ref="morgenBroedItemWriter"/>
         </chunk>    
+    </step>
+    <step id="secondStep" >
+	<batchlet ref="com.teamin.batch.batchlet.SaldoBatchlet"/>
     </step>
 </job>
