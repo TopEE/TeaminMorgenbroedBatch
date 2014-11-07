@@ -69,7 +69,7 @@ public class JobSubmitterServlet extends HttpServlet {
         JobOperator jobOperator = BatchRuntime.getJobOperator();
 
         Properties props = new Properties();
-        long executionID = jobOperator.start(jobName, new Properties());
+        long executionID = jobOperator.start(jobName, props);
 
         try { Thread.sleep(3000); } catch (Exception ex) {}
 
