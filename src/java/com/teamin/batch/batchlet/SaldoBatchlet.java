@@ -5,31 +5,45 @@
  */
 package com.teamin.batch.batchlet;
 
+import com.teamin.entity.Morgenbroed;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.util.List;
 import javax.batch.api.AbstractBatchlet;
+import javax.batch.runtime.context.StepContext;
+import javax.enterprise.context.Dependent;
+import javax.inject.Inject;
 import javax.inject.Named;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  *
  * @author Henrik
  */
+@Dependent
 @Named
 public class SaldoBatchlet extends AbstractBatchlet {
     
+    @Inject StepContext stepCtx;
+    @PersistenceContext
+    EntityManager em;
+     
     private BufferedWriter writer;
     
     @Override
     public String process() {
-        System.out.println("Running inside a batchlet : SaldoBatchlet");
-        // TODO code application logic here
+        List<Morgenbroed> mbListe = em.createNamedQuery("Morgenbroed.findAll").getResultList();
         
         try {
           	writer = new BufferedWriter(new FileWriter("C:\\Temp\\testFiler\\saldo.csv"));
-                writer.append("HVE");
-                writer.append(',');
-                writer.append("31");
-                writer.append('\n');
+                for(Morgenbroed mb : mbListe)
+                {
+                    writer.append(mb.getUserId());
+                    writer.append(',');
+                    writer.append(""+(mb.getBetalt()- mb.getBestilt()));
+                    writer.append('\n');
+                }
                 
                 writer.flush();
                 writer.close();
