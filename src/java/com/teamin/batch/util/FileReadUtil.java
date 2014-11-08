@@ -5,13 +5,41 @@
  */
 package com.teamin.batch.util;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+
 /**
  *
  * @author Henrik
  */
 public class FileReadUtil {
+    
+    boolean found;
+    BufferedReader reader; 
+    int returnValue;
+    String linie;
+    
+    
     public int hentSaldo(String userId)
     {
-        return 567;
+        try {
+            reader = new BufferedReader(new FileReader("C:\\Temp\\testFiler\\saldo.csv"));
+            String linie = reader.readLine();
+            while(!found && linie != null)
+            {
+                if(linie.contains(userId.toUpperCase()))
+                {
+                    String[] parts = linie.split(",");
+                    String gaeldString = parts[1];             
+                    returnValue = Integer.parseInt(gaeldString);
+                    found = true;
+                }
+
+                linie = reader.readLine();
+            }
+        } catch (Exception e) {
+        }
+        
+        return returnValue;
     }
 }
