@@ -14,14 +14,13 @@ import java.io.FileReader;
  */
 public class FileReadUtil {
     
-    boolean found;
-    BufferedReader reader; 
-    int returnValue;
-    String linie;
-    
-    
-    public int hentSaldo(String userId)
+        boolean found;
+        BufferedReader reader; 
+        int returnValue;
+
+        public int hentSaldo(String userId)
     {
+
         try {
             reader = new BufferedReader(new FileReader("C:\\Temp\\testFiler\\saldo.csv"));
             String linie = reader.readLine();
