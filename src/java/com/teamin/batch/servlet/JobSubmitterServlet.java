@@ -43,6 +43,9 @@ public class JobSubmitterServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter pw = response.getWriter();
         try {
+            String [] fileNames = request.getParameterValues("fileName");
+            String fileName = fileNames[0];
+
             pw.println("<html>");
             pw.println("<head>");
             pw.println("<title>Servlet JobSubmitterServlet V2</title>");
@@ -51,7 +54,7 @@ public class JobSubmitterServlet extends HttpServlet {
 
             pw.println("<p>Submitter job med executionId</p>");
             
-            long executionId = submitJobFromXML("morgenBroedJob");
+            long executionId = submitJobFromXML("morgenBroedJob", fileName);
 
             pw.println(executionId);
             pw.println("</body>");
@@ -64,11 +67,13 @@ public class JobSubmitterServlet extends HttpServlet {
     }
 
 
-    private long submitJobFromXML(String jobName)
+    private long submitJobFromXML(String jobName, String fileName)
             throws Exception {
         JobOperator jobOperator = BatchRuntime.getJobOperator();
 
         Properties props = new Properties();
+        props.setProperty("fileName", fileName);
+        
         long executionID = jobOperator.start(jobName, props);
 
         try { Thread.sleep(3000); } catch (Exception ex) {}
