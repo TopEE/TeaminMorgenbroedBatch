@@ -16,6 +16,6 @@ and open the template in the editor.
         </chunk>    
     </step>
     <step id="secondStep" >
-	<batchlet ref="com.teamin.batch.batchlet.SaldoBatchlet"/>
+	<batchlet ref="saldoBatchlet"/>
     </step>
 </job>
