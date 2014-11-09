@@ -25,10 +25,10 @@ public class DecisionInkasso implements Decider{
  public String decide(StepExecution[] ses) throws Exception {
   
    if (Math.random() > 0.5) {
-               System.out.println("STOR GÆLD");
+               System.out.println("STOR GAELD");
    return "STOR_GAELD";
   } else {
-               System.out.println("LILLE GÆLD");
+               System.out.println("LILLE GAELD");
    return "LILLE_GAELD";
   } 
  }
