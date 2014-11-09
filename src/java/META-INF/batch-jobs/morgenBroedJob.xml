@@ -15,8 +15,11 @@ and open the template in the editor.
             <writer ref="morgenBroedItemWriter"/>
         </chunk>    
     </step>
-    <step id="secondStep" >
+    <step id="secondStep" next="thirdStep">
 	<batchlet ref="saldoBatchlet"/>
+    </step>
+    <step id="thirdStep" >
+	<batchlet ref="kopierFilerBatchlet"/>
     </step>
 
 </job>
