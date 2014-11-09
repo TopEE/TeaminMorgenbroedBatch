@@ -15,11 +15,28 @@ and open the template in the editor.
             <writer ref="morgenBroedItemWriter"/>
         </chunk>    
     </step>
-    <step id="secondStep" next="thirdStep">
+   <step id="secondStep" next="thirdStep">
 	<batchlet ref="saldoBatchlet"/>
     </step>
-    <step id="thirdStep" >
+    <step id="thirdStep" next="mailFlow">
 	<batchlet ref="kopierFilerBatchlet"/>
     </step>
+    
+    <flow id="mailFlow" >
+ 
+      <step id="infoMail" next="decider1">
+          <batchlet ref="infoMailBatchlet" />
+      </step>
+ 
+      <decision id="decider1" ref="decisionInkasso">
+         <next on="STOR_GAELD" to="inkassoStep" />
+         <end on="LILLE_GAELD" />
+      </decision>
 
+        <step id="inkassoStep">
+            <batchlet ref="inkassoMailBatchlet"/>
+        </step>
+    </flow>
+
+      
 </job>
