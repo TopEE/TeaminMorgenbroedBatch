@@ -20,6 +20,7 @@ import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMultipart;
 
 /**
  *
@@ -53,7 +54,7 @@ public class MailTest {
 
         message.setSubject("Testing Subject");
         message.setText("This is Test mail");
-        Multipart mp = new Multipart();
+        Multipart mp = new MimeMultipart();
         BodyPart bp = new BodyPart() {
 
             @Override
@@ -180,9 +181,9 @@ public class MailTest {
             public Enumeration getNonMatchingHeaders(String[] header_names) throws MessagingException {
                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
-        }
+        };
         
-        message.setContent("This Is my First Mail Through Java");
+        message.setContent(new MimeMultipart("This Is my First Mail Through Java"));
 
         message.setNotifyOptions(SMTPMessage.NOTIFY_SUCCESS);
         int returnOption = message.getReturnOption();
