@@ -1,10 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.teamin.batch.decision;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import javax.batch.api.Decider;
 import javax.batch.runtime.StepExecution;
 import javax.batch.runtime.context.JobContext;
@@ -18,18 +15,39 @@ import javax.inject.Named;
 @Named
 public class DecisionInkasso implements Decider{
     
-    @Inject
- JobContext jobContext;
+        BufferedReader reader;
+        int gaeld;
+
+        @Inject
+        JobContext jobContext;
  
  @Override
  public String decide(StepExecution[] ses) throws Exception {
-  
-   if (Math.random() > 0.5) {
-               System.out.println("STOR GAELD");
-   return "STOR_GAELD";
-  } else {
-               System.out.println("LILLE GAELD");
-   return "LILLE_GAELD";
-  } 
+    
+        try 
+        {
+            reader = new BufferedReader(new FileReader("C:\\Temp\\testFiler\\saldo.csv"));
+            
+            String linie = reader.readLine();
+            while(linie != null)
+            {
+                    String[] parts = linie.split(",");
+                    String gaeldString = parts[1];             
+                    gaeld = Integer.parseInt(gaeldString);
+                    if(gaeld > 200)
+                    {
+                       System.out.println("STOR GAELD");
+                       return "STOR_GAELD";
+                    }
+
+                linie = reader.readLine();
+            }
+        } 
+        catch (Exception e) 
+        {
+        }
+
+        System.out.println("LILLE GAELD");
+        return "LILLE_GAELD";
  }
 }
