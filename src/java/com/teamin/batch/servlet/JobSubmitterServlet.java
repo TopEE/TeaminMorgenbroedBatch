@@ -45,11 +45,19 @@ public class JobSubmitterServlet extends HttpServlet {
         try {
             String [] fileNames = request.getParameterValues("fileName");
             String fileName = fileNames[0];
-
-            long executionId = submitJobFromXML("morgenBroedJob", fileName);
-
-            pw.println(executionId);
-
+            String [] execIds = request.getParameterValues("execId");
+            if(execIds == null || execIds.length==0)
+            {
+                long executionId = submitJobFromXML("morgenBroedJob", fileName);
+                pw.println(executionId);
+            }
+            else
+            {
+                String execIdStr = execIds[0];
+                long execId = Long.parseLong(execIdStr);
+                long executionId = genstartJob(execId, fileName);
+                pw.println(executionId);
+            }
         } catch (Exception ex) {
             throw new ServletException(ex);
         } finally {
@@ -57,6 +65,18 @@ public class JobSubmitterServlet extends HttpServlet {
         }
     }
 
+    private long genstartJob(long executionId, String fileName){
+    
+        JobOperator jobOperator = BatchRuntime.getJobOperator();
+
+        Properties props = new Properties();
+        props.setProperty("fileName", fileName);
+        
+        long executionID = jobOperator.restart(executionId, props);
+
+        try { Thread.sleep(3000); } catch (Exception ex) {}
+        return executionID;
+    }
 
     private long submitJobFromXML(String jobName, String fileName)
             throws Exception {
@@ -68,7 +88,6 @@ public class JobSubmitterServlet extends HttpServlet {
         long executionID = jobOperator.start(jobName, props);
 
         try { Thread.sleep(3000); } catch (Exception ex) {}
-
         return executionID;
     }
     
