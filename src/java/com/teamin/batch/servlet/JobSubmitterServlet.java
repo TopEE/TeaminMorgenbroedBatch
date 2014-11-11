@@ -46,19 +46,10 @@ public class JobSubmitterServlet extends HttpServlet {
             String [] fileNames = request.getParameterValues("fileName");
             String fileName = fileNames[0];
 
-            pw.println("<html>");
-            pw.println("<head>");
-            pw.println("<title>Servlet JobSubmitterServlet V2</title>");
-            pw.println("</head>");
-            pw.println("<body>");
-
-            pw.println("<p>Submitter job med executionId</p>");
-            
             long executionId = submitJobFromXML("morgenBroedJob", fileName);
 
             pw.println(executionId);
-            pw.println("</body>");
-            pw.println("</html>");
+
         } catch (Exception ex) {
             throw new ServletException(ex);
         } finally {
