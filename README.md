@@ -24,3 +24,5 @@ Hvis f.eks. record-nummer 5 indeholder ugyldige data, så vil der blive lavet 3 
 Det skyldes, at vi opererer med en chunk-size på 3. Dvs. record-nummer 4 vil ikke blive skrevet i databasen,
 selvom det først er record-nummer 5, der er ugyldig.
 Ved genstart vil record-nummer 4 samt de følgende records blive skrevet i databasen.
+
+Sluttelig skal det nævnes, at udfaldet af de enkeltes steps i et batch-job kan checkes i serverens admin-konsol.
