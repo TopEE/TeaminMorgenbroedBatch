@@ -19,7 +19,7 @@ import javax.mail.internet.MimeMessage;
 @Named
 public class InfoMailBatchlet extends AbstractBatchlet {
     
-    private static String HOSTNAME = "localhost";
+    private static String HOSTNAME = "localhost";// mail.hmailserver.com
     private static String USERNAME = "admin";
     private static String PASSWORD = "henrik1969";
 
