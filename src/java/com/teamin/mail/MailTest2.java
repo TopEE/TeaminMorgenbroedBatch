@@ -23,11 +23,13 @@ public class MailTest2 {
 
     private static String HOSTNAME = "localhost";
     private static String USERNAME = "admin";
-    private static String PASSWORD = "jensgn";
+    private static String PASSWORD = "henrik1969";
 
     public static void main(String[] args) {
         try {
-            String to = "jensgn@gmail.com";    //"hve@teamin.dk";
+            String to1 = "hve@teamin.dk";    
+            String to2 = "jmn@teamin.dk";    
+            String to3 = "jhl@teamin.dk";    
             String from = "jmn@teamin.dk";
             Properties properties = System.getProperties();
 
@@ -39,7 +41,9 @@ public class MailTest2 {
             });
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(from));
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to1));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to2));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to3));
             message.setSubject("My Subject!");
             message.setText("Here Goes My Message");
             Transport.send(message);
