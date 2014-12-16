@@ -85,8 +85,8 @@ public class JobSubmitterServlet extends HttpServlet {
         Properties props = new Properties();
         props.setProperty("fileName", fileName);
         
-        long executionID = jobOperator.start(jobName, props);
-
+        long executionID = jobOperator.start(jobName, props);   
+        
         try { Thread.sleep(3000); } catch (Exception ex) {}
         return executionID;
     }
