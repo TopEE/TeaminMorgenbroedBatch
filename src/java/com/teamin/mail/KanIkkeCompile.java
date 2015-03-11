@@ -10,5 +10,5 @@ package com.teamin.mail;
  * @author Henrik
  */
 public class KanIkkeCompile {
-    kanIkkeCompile checkIndIgen
+    kanIkkeCompile checkIndIgen og igen
 }
